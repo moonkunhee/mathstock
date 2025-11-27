@@ -1,28 +1,34 @@
-📈 Mathstock
-Mathstock은 주식 데이터를 수학 함수처럼 다루고 시각화할 수 있는 웹 애플리케이션입니다. GeoGebra처럼 주가 데이터를 변수(f1, f2)로 정의하고, 사칙연산, 로그, 삼각함수, 이동평균선 등 다양한 수학적 모델링을 실시간으로 그래프에 그릴 수 있습니다.
+# 📈 Mathstock
 
-✨ 주요 기능
-주가 데이터 호출: NVDA, AAPL 등 티커 입력 시 실시간 데이터 로드 (Yahoo Finance)
+**Mathstock**은 주식 데이터를 수학 함수처럼 다루고 시각화할 수 있는 웹 애플리케이션입니다.  
+GeoGebra처럼 주가 데이터를 변수(`f1`, `f2`)로 정의하고, 사칙연산, 로그, 삼각함수, 이동평균선 등 다양한 수학적 모델링을 실시간으로 그래프에 그릴 수 있습니다.
 
-수학 연산: log(AAPL), AAPL + TSLA, sin(x/10) 등 복잡한 수식 계산
+## ✨ 주요 기능
 
-함수 참조: f1 = AAPL로 정의 후 f2 = f1 + 100 처럼 변수 재사용 가능
+- **주가 데이터 호출:** `NVDA`, `AAPL` 등 티커 입력 시 실시간 데이터 로드 (Yahoo Finance)
+- **수학 연산:** `log(AAPL)`, `AAPL + TSLA`, `sin(x/10)` 등 복잡한 수식 계산
+- **함수 참조:** `f1 = AAPL`로 정의 후 `f2 = f1 + 100` 처럼 변수 재사용 및 체이닝 가능
+- **순수 수학 함수:** 주식 데이터 없이 `x^2`, `sin(x)` 등의 순수 수학 그래프 지원 (자동 시간축 생성)
+- **기간/봉 설정:** 1일~5년(Range), 1분~1달(Interval) 데이터 조회
+- **시각화 제어:** 그래프 숨기기/보이기(Eye Icon), 자동 스케일링
+- **보안:** `simpleeval`을 적용하여 안전한 수식 계산 환경 구축 (Sandbox)
 
-순수 수학 함수: 주식 데이터 없이 x^2, sin(x) 등의 수학 그래프 지원
+## 🛠 기술 스택
 
-기간/봉 설정: 1일~5년(Range), 1분~1달(Interval) 데이터 조회
+- **Frontend:** React, Vite, Recharts
+- **Backend:** Python, FastAPI, Pandas, NumPy, yfinance
+- **Security:** SimpleEval (Python Arbitrary Code Execution 방지)
 
-보안: simpleeval을 적용하여 안전한 수식 계산 환경 구축 (Sandbox)
+---
 
-🛠 기술 스택
-Frontend: React, Vite, Recharts
+## 🚀 설치 가이드 (Installation)
 
-Backend: Python, FastAPI, Pandas, NumPy, yfinance
+이 프로젝트를 실행하려면 **Node.js**와 **Python 3.x**가 설치되어 있어야 합니다.
 
-Security: SimpleEval (Python Arbitrary Code Execution 방지)
-
-🚀 설치 및 실행 가이드
-이 프로젝트를 실행하려면 Node.js와 Python이 설치되어 있어야 합니다.
+### 1. 프로젝트 다운로드
+```bash
+git clone [https://github.com/YOUR_GITHUB_ID/mathstock.git](https://github.com/YOUR_GITHUB_ID/mathstock.git)
+cd mathstock
 
 1. 프로젝트 다운로드 (Clone)
 먼저 터미널을 열고 코드를 내려받습니다.
