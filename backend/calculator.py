@@ -26,8 +26,8 @@ ALLOWED_FUNCTIONS = {
     "sin": np.sin,
     "cos": np.cos,
     "tan": np.tan,
-    "log": np.log,      # 자연로그 (ln)
-    "log10": np.log10,  # 상용로그
+    "log": np.log,
+    "log10": np.log10,
     "exp": np.exp,
     "sqrt": np.sqrt,
     "abs": np.abs,
