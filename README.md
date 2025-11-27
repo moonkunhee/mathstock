@@ -9,7 +9,7 @@ GeoGebra처럼 주가 데이터를 변수(`f1`, `f2`)로 정의하고, 사칙연
 - **수학 연산:** `log(AAPL)`, `AAPL + TSLA`, `sin(x/10)` 등 복잡한 수식 계산
 - **함수 참조:** `f1 = AAPL`로 정의 후 `f2 = f1 + 100` 처럼 변수 재사용 및 체이닝 가능
 - **순수 수학 함수:** 주식 데이터 없이 `x^2`, `sin(x)` 등의 순수 수학 그래프 지원 (자동 시간축 생성)
-- **기간/봉 설정:** 1일~5년(Range), 1분~1달(Interval) 데이터 조회
+- **기간/봉 설정:** 1일-5년(Domain), 1분-1달(Interval) 데이터 조회
 - **시각화 제어:** 그래프 숨기기/보이기(Eye Icon), 자동 스케일링
 - **보안:** `simpleeval`을 적용하여 안전한 수식 계산 환경 구축 (Sandbox)
 
@@ -27,68 +27,76 @@ GeoGebra처럼 주가 데이터를 변수(`f1`, `f2`)로 정의하고, 사칙연
 
 ### 1. 프로젝트 다운로드
 ```bash
-git clone [https://github.com/YOUR_GITHUB_ID/mathstock.git](https://github.com/YOUR_GITHUB_ID/mathstock.git)
+git clone https://github.com/moonkunhee/mathstock.git
 cd mathstock
+```
 
-1. 프로젝트 다운로드 (Clone)
-먼저 터미널을 열고 코드를 내려받습니다.
-
-Bash
-
-git clone https://github.com/YOUR_GITHUB_ID/mathstock.git
-cd mathstock
-2. 백엔드 설정 (Python)
+### 2. 백엔드 설정 (Python)
 주식 데이터를 가져오고 계산하는 서버를 설정합니다.
 
 백엔드 폴더로 이동
 
-Bash
-
+```bash
 cd backend
+```
+
 가상환경 생성 및 실행
 
 Mac/Linux (WSL):
 
-Bash
+```bash
 
 python3 -m venv venv
 source venv/bin/activate
+```
+
 Windows (PowerShell):
 
-Bash
+```bash
 
 python -m venv venv
 .\venv\Scripts\Activate
+
+```
+
 필수 라이브러리 설치
 
-Bash
-
+```bash
 pip install -r requirements.txt
-(만약 requirements.txt가 없다면: pip install fastapi uvicorn yfinance pandas simpleeval)
+```
 
-3. 프론트엔드 설정 (React)
-웹사이트 화면을 구성하는 라이브러리를 설치합니다. (새 터미널을 열거나, 백엔드 폴더에서 상위 폴더로 이동하세요: cd ..)
+(만약 requirements.txt가 없다면: ``` pip install fastapi uvicorn yfinance pandas simpleeval```)
 
-Bash
+### 3. 프론트엔드 설정 (React)
+웹사이트 화면을 구성하는 라이브러리를 설치합니다. (새 터미널을 열거나, 백엔드 폴더에서 상위 폴더로 이동하세요: ``cd ..``)
 
-# 프로젝트 루트 폴더(mathstock)에서 실행
+
+프로젝트 루트 폴더(mathstock)에서 실행 
+
+```bash
 npm install
+```
 ▶️ 실행 방법
 서버는 백엔드와 프론트엔드 두 개를 동시에 켜야 합니다. 터미널을 2개 열어주세요.
 
 터미널 1: 백엔드 실행 (Port: 8000)
-Bash
+
+```bash
 
 cd backend
 source venv/bin/activate  # 가상환경 켜기 (Windows는 .\venv\Scripts\Activate)
 python3 -m uvicorn main:app --reload
+```
+
 성공 시: Application startup complete. 메시지 출력
 
 터미널 2: 프론트엔드 실행 (Port: 5173)
-Bash
 
-# 프로젝트 루트 폴더에서
+프로젝트 루트 폴더에서
+
+```bash
 npm run dev
+```
 성공 시: Local: http://localhost:5173/ 메시지 출력
 
 👉 이제 브라우저에서 http://localhost:5173 으로 접속하면 Mathstock을 사용할 수 있습니다!
