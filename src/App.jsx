@@ -34,18 +34,16 @@ const App = () => {
   };
 
   // --- 2. 서버 통신 ---
-  const fetchCalculation = async (funcId, equation, range, interval) => {
+const fetchCalculation = async (funcId, equation, range, interval) => {
     if (!equation.trim()) return;
 
-    // 1단계: 변수 참조 해결 (예: f2 = f1 + 10 -> f2 = (NVDA) + 10)
     let finalEquation = resolveEquation(equation, funcId, functions);
-
-    // 2단계: [NEW] 사용자 입력 'x'를 시간 변수 't'로 변환
-    // 정규식 \b는 단어 경계를 의미 (ex 같은 단어 속 x는 안 바꿈)
     finalEquation = finalEquation.replace(/\bx\b/gi, 't');
 
     try {
-      const response = await fetch('http://localhost:8000/calculate', {
+      // [수정됨] 복잡한 ngrok 주소 다 지우고, 그냥 '/calculate'만 남기세요!
+      // Vite가 알아서 8000번으로 토스해줍니다.
+      const response = await fetch('/calculate', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ equation: finalEquation, range, interval })
