@@ -4,10 +4,12 @@ const FunctionCard = ({ func, onUpdate, onRemove, onToggle, onCalculate }) => {
   const [showMath, setShowMath] = useState(false);
   const inputRef = useRef(null);
 
+  // 엔터 키를 눌렀을 때 계산 요청
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') onCalculate(func);
   };
 
+  // Math 패드 버튼 클릭 시 수식 삽입
   const insertMath = (text) => {
     if (!func.visible) return;
     const input = inputRef.current;
@@ -15,8 +17,14 @@ const FunctionCard = ({ func, onUpdate, onRemove, onToggle, onCalculate }) => {
       const start = input.selectionStart;
       const end = input.selectionEnd;
       const currentVal = func.equation || "";
+      
+      // 커서 위치에 텍스트 삽입
       const newVal = currentVal.substring(0, start) + text + currentVal.substring(end);
+      
+      // 상태 업데이트 (서버 요청 X)
       onUpdate(func.id, 'equation', newVal);
+      
+      // 입력 후 포커스 유지 및 커서 이동
       setTimeout(() => {
         input.focus();
         input.setSelectionRange(start + text.length, start + text.length);
@@ -32,7 +40,7 @@ const FunctionCard = ({ func, onUpdate, onRemove, onToggle, onCalculate }) => {
 
   return (
     <div style={{ 
-      backgroundColor: func.visible ? '#154360' : '#546e7a', // 이미지와 비슷한 짙은 청색
+      backgroundColor: func.visible ? '#154360' : '#546e7a', 
       color: 'white', 
       borderRadius: '8px', 
       padding: '20px', 
@@ -74,6 +82,7 @@ const FunctionCard = ({ func, onUpdate, onRemove, onToggle, onCalculate }) => {
             value={func.equation}
             onChange={(e) => onUpdate(func.id, 'equation', e.target.value)}
             onKeyDown={handleKeyDown}
+            onBlur={() => onCalculate(func)} // [핵심] 입력창에서 나갈 때 계산 요청
             disabled={!func.visible}
             placeholder="ex: NVDA"
             style={{ 
@@ -83,7 +92,7 @@ const FunctionCard = ({ func, onUpdate, onRemove, onToggle, onCalculate }) => {
           />
         </div>
 
-        {/* 3. 하단 옵션 영역 (Grid Layout 사용) */}
+        {/* 3. 하단 옵션 영역 */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           
           {/* 왼쪽: 드롭다운 그룹 */}
@@ -125,7 +134,7 @@ const FunctionCard = ({ func, onUpdate, onRemove, onToggle, onCalculate }) => {
           {/* 오른쪽: 액션 버튼 그룹 (Math & Color) */}
           <div style={{ display: 'flex', gap: '15px' }}>
             
-            {/* Math Button Group */}
+            {/* Math Button */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
               <span style={{ fontSize: '0.9rem', color: '#fff', fontWeight: '500' }}>Math</span>
               <button
@@ -136,7 +145,7 @@ const FunctionCard = ({ func, onUpdate, onRemove, onToggle, onCalculate }) => {
                   border: '1px solid rgba(255,255,255,0.7)', 
                   borderRadius: '6px', 
                   cursor: 'pointer', 
-                  backgroundColor: showMath ? '#2980b9' : '#1a5276', // 눌렀을 때/안눌렀을 때 색상 차이
+                  backgroundColor: showMath ? '#2980b9' : '#1a5276',
                   color: 'white', fontSize: '0.9rem',
                   boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
                 }}
@@ -145,7 +154,7 @@ const FunctionCard = ({ func, onUpdate, onRemove, onToggle, onCalculate }) => {
               </button>
             </div>
 
-            {/* Color Picker Group */}
+            {/* Color Picker */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
               <span style={{ fontSize: '0.9rem', color: '#fff', fontWeight: '500' }}>Color</span>
               <div style={{ position: 'relative', width: '40px', height: '40px' }}>
@@ -168,7 +177,7 @@ const FunctionCard = ({ func, onUpdate, onRemove, onToggle, onCalculate }) => {
           </div>
         </div>
 
-        {/* Math Keypad (열리면 하단에 표시) */}
+        {/* Math Keypad */}
         {showMath && func.visible && (
           <div style={{ 
             marginTop: '15px', padding: '10px', 

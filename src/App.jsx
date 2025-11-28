@@ -79,15 +79,13 @@ const App = () => {
   const removeFunction = (id) => setFunctions(functions.filter(f => f.id !== id));
   const toggleVisibility = (id) => setFunctions(prev => prev.map(f => f.id === id ? { ...f, visible: !f.visible } : f));
   
+// 수정된 updateField 함수
   const updateField = (id, field, value) => {
     setFunctions(prev => {
       const newFunctions = prev.map(f => {
         if (f.id === id) {
-          const updatedFunc = { ...f, [field]: value };
-          if (field !== 'color' && field !== 'name' && f.equation) {
-             fetchCalculation(id, updatedFunc);
-          }
-          return updatedFunc;
+          // 상태(글자, 색상 등)만 업데이트하고, 서버 요청은 하지 않음
+          return { ...f, [field]: value };
         }
         return f;
       });
