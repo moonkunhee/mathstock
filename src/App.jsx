@@ -41,7 +41,7 @@ const App = () => {
     finalEquation = finalEquation.replace(/\bx\b/gi, 't');
 
     try {
-      const API_URL = "http://localhost:8000"; // 필요시 ngrok 주소로 변경
+      const API_URL = "https://mathstock.onrender.com/"; // 필요시 ngrok 주소로 변경
       const response = await fetch(`${API_URL}/calculate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
